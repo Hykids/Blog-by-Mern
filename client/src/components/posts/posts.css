@@ -1,0 +1,5 @@
+.posts {
+    flex: 9;
+    flex-wrap: wrap;
+    display: flex;
+}
