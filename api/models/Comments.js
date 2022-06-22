@@ -1,22 +1,20 @@
 const mongoose = require("mongoose")
 
 const CommentSchema = new mongoose.Schema({
-    posr_id: {
-        type: String,
-        required: true,
-    },
     content: {
         type: String,
         required: true,
     },
     username: {
-        type: Array,
+        type: String,
         required: true,
     }, to_username: {
-        type: Array,
+        type: String,
         required: false,
+    }, title: {//文章标题
+        type: String,
+        required: true,
     }
-
 },
     { timestamps: true })
 

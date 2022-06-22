@@ -14,8 +14,11 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: false,
     }, username: {
-        type: Array,
+        type: String,
         required: false,
+    }, tab: {
+        type: Array,
+        require: false,
     }
 },
     { timestamps: true })
