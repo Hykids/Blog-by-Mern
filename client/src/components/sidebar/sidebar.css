@@ -16,7 +16,7 @@
 .categoryList {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     list-style: none;
 }
 
@@ -24,7 +24,7 @@
 .categoryListItem {
     margin-top: 5px;
     width: 80%;
-    border-bottom: 1px solid tan;
+    /* border-bottom: 1px solid tan; */
 }
 
 .categoryListItem:hover {

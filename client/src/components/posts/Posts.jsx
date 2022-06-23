@@ -1,11 +1,11 @@
 import Post from '../post/Post'
 import './posts.css'
 
-export default function Posts({ post }) {
+export default function Posts({ posts }) {
     return (
-        <div className='posts'>
-            {post.map(p => (
-                <Post posts={p} />
+        <div className="posts">
+            {posts.map(p => (
+                <Post post={p} />
             ))}
         </div>
     )

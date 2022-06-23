@@ -1,6 +1,6 @@
 .post {
     width: 80%;
-    margin: 0px 25px 40px;
+    margin: 0px 25px 10px;
     display: flex;
     border-bottom: 1px solid wheat;
 }
@@ -18,10 +18,10 @@
     flex-direction: column;
     display: flex;
     margin-left: 20px;
-    max-height: 110px;
+    max-height: 100px;
 }
 
-.postCat {
+.postTabs {
     font-family: 'Varela', sans-serif;
     font-size: 11px;
     color: #be9656;
@@ -33,7 +33,7 @@
 
 .postTitle {
     font-family: 'Josefin Slab', serif;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
 }
 
