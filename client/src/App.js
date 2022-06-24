@@ -8,7 +8,7 @@ import Register from "./pages/register/Register"
 import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
-	const user = false
+	const user = true
 	return (
 		<div>
 			<Topbar />

@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.get("/", async (res, req) => {
+router.get("/", async (err, res, req) => {
     try {
         const tabs = await Tab.find()
         res.status(200).json(tabs)
@@ -21,9 +21,9 @@ router.get("/", async (res, req) => {
     }
 })
 
-router.delete("/:id", async (res, req) => {
-    const tab = await Tab.findById(req.params.id)
+router.delete("/:id", async (err, res, req) => {
     try {
+        const tab = await Tab.findById(req.params.id)
         await tab.delete()
         res.status(200).json("tab has been delected..")
     } catch (err) {

@@ -24,7 +24,7 @@ router.put("/:id", async (req, res) => {
     }
 })
 
-router.get("/", async (res, req) => {
+router.get("/", async (err, res, req) => {
     try {
         const cats = await Category.find()
         res.status(200).json(cats)

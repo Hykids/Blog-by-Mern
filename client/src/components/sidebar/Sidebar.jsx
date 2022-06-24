@@ -1,6 +1,18 @@
+import { useEffect, useState } from 'react'
+import axios from "axios"
 import './sidebar.css'
 
 export default function Sidebar() {
+  const [tabs, setTabs] = useState([]);
+
+  useEffect(() => {
+    const fetchTabs = async () => {
+      const res = await axios.get("/tabs")
+      console.log(res.data)
+      setTabs(res.data)
+    }
+    fetchTabs()
+  }, [])
   return (
     <div className='sidebar'>
 
@@ -17,10 +29,9 @@ export default function Sidebar() {
       <div className='sidebarItem'>
         <span className="sidebarTitle">Tag</span>
         <ul className='sidebatList'>
-          <li className="sidebarListItem">React</li>
-          <li className="sidebarListItem">Node</li>
-          <li className="sidebarListItem">MongoDB</li>
-          <li className="sidebarListItem">Epress</li>
+          {tabs.map(t => {
+            return <li className="sidebarListItem">{t['tab']}</li>
+          })}
         </ul>
       </div>
     </div>
