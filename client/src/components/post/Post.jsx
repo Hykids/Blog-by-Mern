@@ -2,9 +2,10 @@ import "./post.css"
 import { Link } from "react-router-dom"
 
 function Post({ post }) {
+    console.log(post)
+    const PF = "http://localhost:3001/images/";
     return (
         <div className='post'>
-            {/* <img className="postImg" src="https://th.bing.com/th/id/OIP.0GJmxu5xcbDndEeCn3zfxAHaE7?w=263&h=180&c=7&r=0&o=5&dpr=1.25&pid=1.7" alt="" /> */}
             <div className="postInfo">
                 <Link to={'/post/' + post._id} className='link'>
                     <span className="postTitle">
@@ -23,6 +24,7 @@ function Post({ post }) {
                     {post.desc}
                 </p>
             </div>
+            {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
         </div>
     );
 }

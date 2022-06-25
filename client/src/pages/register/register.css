@@ -47,3 +47,8 @@
     color: black;
     font-size: 15px;
 }
+
+.error {
+    color: rgb(218, 105, 105);
+    font-size: 12px;
+}

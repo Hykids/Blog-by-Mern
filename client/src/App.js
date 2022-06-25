@@ -5,10 +5,12 @@ import Write from "./pages/write/Write"
 // import Setting from "./pages/setting/Setting"
 import Login from "./pages/login/Login"
 import Register from "./pages/register/Register"
+import { useContext } from "react"
 import { Routes, Route } from 'react-router-dom';
+import { Context } from "./context/Context"
 
 const App = () => {
-	const user = true
+	const { user } = useContext(Context);
 	return (
 		<div>
 			<Topbar />

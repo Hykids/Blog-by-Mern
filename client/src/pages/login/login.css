@@ -43,6 +43,11 @@
     padding: 10px;
 }
 
+.loginButton:disabled {
+    cursor: not-allowed;
+    background-color: rgb(240, 167, 167);
+}
+
 .toRegister {
     color: black;
     font-size: 15px;
