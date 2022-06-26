@@ -19,12 +19,21 @@ export default function SinglePost() {
         const getPost = async () => {
             const res = await axios.get("/posts/" + path)
             setPost(res.data)
+            setTitle(res.data.title)
+            setDesc(res.data.desc)
         };
         getPost()
     }, [path]);
 
     const handleUpdate = async () => {
-
+        try {
+            await axios.put("/posts/" + path, {
+                username: user._doc.username,
+                title,
+                desc,
+            })
+            setUpdate(false)
+        } catch (err) { }
     }
 
     const handleDelete = async () => {
@@ -39,9 +48,9 @@ export default function SinglePost() {
         <div className='singlePost'>
             <div className="singlePostWrapper">
                 {post.photo && <img className="singlePostImg" src={PF + post.photo} alt="" />}
-                {update ? <input type="text" value={post.title} className="singlePostTitleInput" /> : (
+                {update ? <input type="text" value={title} onChange={e => { setTitle(e.target.value) }} className="singlePostTitleInput" /> : (
                     <h1 className="singlePostTitle">
-                        {post.title}
+                        {title}
                         {post.username === user._doc.username && (
                             <div className="singlePostEdit">
                                 <i className="singlePostIcon fa-solid fa-pen-to-square" onClick={e => setUpdate(true)}></i>
@@ -59,10 +68,12 @@ export default function SinglePost() {
                     </span>
                     <span className='singlePostDate'>{new Date(post.createdAt).toDateString()}</span>
                 </div>
-                {update ? <textarea type="text" value={post.desc} className="singlePostDescInput" /> :
+                {update ? <textarea type="text" value={desc} className="singlePostDescInput" onChange={e => setDesc(e.target.value)} /> :
                     (<p className="singlePostDesc">
-                        {post.desc}
-                    </p>)}
+                        {desc}
+                    </p>
+                    )}
+                {update && <button className="singlePostButton" onClick={handleUpdate}>保存</button>}
             </div>
         </div>
     )
