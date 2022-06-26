@@ -12,15 +12,13 @@ export default function Topbar() {
     return (
         <div className='top'>
             <div className='topLeft'>
-                <i class="topIcon fa-solid fa-cube"></i>
-            </div>
-            <div className='topCenter'>
+                <i className="topIcon fa-solid fa-blog"></i>
                 <ul className='topList'>
                     <li className='topListItem'>
                         <Link to="/" className='link'>Home</Link>
                     </li>
-                    <li className='topListItem'>About</li>
-                    <li className='topListItem'>Contact</li>
+                    {/* <li className='topListItem'>About</li>
+                    <li className='topListItem'>Contact</li> */}
                     <li className='topListItem'>
                         <Link to="/write" className='link'>Write</Link>
                     </li>
@@ -29,10 +27,16 @@ export default function Topbar() {
                     </li>
                 </ul>
             </div>
+            <div className='topCenter'>
+                {/* <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
+                <input className='topSearchInput' type="search" /> */}
+            </div>
             <div className='topRight'>
+                <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
+                <input className='topSearchInput' type="search" />
                 {
                     user ? (
-                        <img className='topImg' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxzIe5lDEHN528qVe-g88NWgiI6LFuMEKihw&usqp=CAU" alt="" />
+                        <p>登录用户：<b>{user._doc.username}</b></p>
                     ) : (
                         <ul className='topList'>
                             <li className='topListItem'>
@@ -44,8 +48,6 @@ export default function Topbar() {
                         </ul>
                     )
                 }
-
-                <i class="topSearchIcon fa-solid fa-magnifying-glass"></i>
             </div>
         </div >
     )

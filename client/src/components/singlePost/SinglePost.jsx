@@ -61,6 +61,7 @@ export default function SinglePost() {
                 )}
                 <div className="singlePostInfo">
                     <span className='singlePostAutor'>
+                        <i className="singlePostUserIcon fa-solid fa-user"></i>
                         Author:
                         <Link to={'/?user=' + post.username} className='link'>
                             <b>{post.username}</b>

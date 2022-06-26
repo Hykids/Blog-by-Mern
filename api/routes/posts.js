@@ -66,6 +66,7 @@ router.get("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
     const username = req.query.user
     const tabName = req.query.tab
+    const limit = req.query.page
     try {
         let posts;
         if (tabName) {
@@ -73,11 +74,11 @@ router.get("/", async (req, res) => {
                 tab: {
                     $in: [tabName],
                 }
-            })
+            }).sort({ _id: -1 })
         } else if (username) {
-            posts = await Post.find({ username })
+            posts = await Post.find({ username }).sort({ _id: -1 })
         } else {
-            posts = await Post.find()
+            posts = await Post.find().sort({ _id: -1 })
         }
         res.status(200).json(posts)
     } catch (err) {

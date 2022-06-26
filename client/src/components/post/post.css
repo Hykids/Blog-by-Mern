@@ -1,9 +1,16 @@
 .post {
     width: 80%;
-    margin: 0px 25px 10px;
+    margin: 0px 25px 20px;
+    margin-left: 200px;
+    padding: 10px;
     display: flex;
-    border-bottom: 1px solid wheat;
+    /* border-bottom: 1px solid wheat; */
     justify-content: space-between;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.post:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .postImg {
@@ -37,6 +44,11 @@
     font-weight: 700;
 }
 
+.postTitle:hover {
+    color: rgb(219, 181, 110);
+    font-size: 30px;
+}
+
 .postDate {
     font-family: 'Lora', serif;
     font-style: italic;
@@ -50,4 +62,30 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+.postTitle:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: wheat;
+    height: 1px;
+}
+
+.postTitle:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: wheat;
+    height: 1px;
 }
