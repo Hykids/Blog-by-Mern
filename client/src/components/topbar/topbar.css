@@ -1,7 +1,7 @@
 .top {
     width: 100%;
     height: 50px;
-    background-color: wheat;
+    background-color: rgb(238, 232, 213);
     position: sticky;
     top: 0;
     display: flex;
@@ -64,11 +64,10 @@
 .topSearchInput {
     border: none;
     border-radius: 5px;
-    background-color: rgb(218, 181, 113);
+    background-color: rgb(221, 214, 193);
     height: 30px;
     margin-right: 40px;
     width: 200px;
-    color: white;
 }
 
 .topSearchInput:focus {

@@ -17,7 +17,6 @@ function Post({ post }) {
                     })}
                 </div>
                 <span className="postDate">
-                    <i class="fa-solid fa-clock"></i>
                     {new Date(post.createdAt).toDateString()}
                 </span>
                 <p className="postDesc">

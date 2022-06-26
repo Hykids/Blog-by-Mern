@@ -28,7 +28,7 @@ export default function Write() {
         }
         try {
             await axios.post("/posts", newPost)
-            window.location.replace("/")
+            // window.location.replace("/")
         } catch (err) { }
     }
     return (

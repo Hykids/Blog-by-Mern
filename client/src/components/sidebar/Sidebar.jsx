@@ -12,6 +12,8 @@ export default function Sidebar() {
       const res1 = await axios.get("/tabs")
       // const res2 = await axios.get("/categories")
       setTabs(res1.data)
+      // let tabname = tabs.map(t => t['tab'])
+      localStorage.setItem("tabs", JSON.stringify(res1.data))
       // setCategory(res2.data)
     }
     fetchItems()
@@ -23,7 +25,7 @@ export default function Sidebar() {
           <i className="sidebarIcon fa-solid fa-cube"></i>
           关于网站
         </span>
-        <p>使用MERN技术栈搭建的个人博客，记录日常与技术，正在开发中。</p>
+        <p>使用MERN技术栈搭建的个人博客，记录日常与技术。已实现基本样式与文章的增删改查。余下功能正在开发中。</p>
         <p>关于我：<a className='link' href='https://github.com/Hykids'><i class="fa-brands fa-github"></i></a></p>
         <p><a className='link' href="https://github.com/Hykids/Blog">代码仓库</a></p>
       </div>

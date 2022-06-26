@@ -1,5 +1,5 @@
 .header {
-    background-color: rgb(249, 233, 204);
+    background-color: rgb(253, 246, 227);
     margin-bottom: 40px;
 }
 
@@ -20,14 +20,14 @@
 
 .headerTitleLg {
     position: absolute;
-    top: 20%;
+    top: 22%;
     left: 10%;
     font-size: 50px;
 }
 
 .headerDesc {
     position: absolute;
-    top: 28%;
+    top: 33%;
     left: 10%;
     width: 30%;
 }

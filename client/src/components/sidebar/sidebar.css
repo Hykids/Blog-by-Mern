@@ -48,6 +48,11 @@
     /* text-align: center; */
 }
 
+.sidebatList {
+    margin: 0;
+    padding: 0;
+}
+
 .sidebarItem>img {
     margin-top: 15px;
     max-width: 280px;
@@ -69,7 +74,7 @@
     background-color: cornflowerblue;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px 10px;
+    margin: 5px 5px;
     justify-self: start;
 }
 
