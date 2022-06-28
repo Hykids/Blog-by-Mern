@@ -63,10 +63,11 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+//万用查询
 router.get("/", async (req, res) => {
     const username = req.query.user
     const tabName = req.query.tab
-    const limit = req.query.page
+    const title = req.query.title
     try {
         let posts;
         if (tabName) {
@@ -77,12 +78,31 @@ router.get("/", async (req, res) => {
             }).sort({ _id: -1 })
         } else if (username) {
             posts = await Post.find({ username }).sort({ _id: -1 })
+        } else if (title) {
+            posts = await Post.find({ "title": title })
         } else {
-            posts = await Post.find().sort({ _id: -1 })
+            posts = await Post.find().sort({ _id: -1 }).limit(6)
         }
         res.status(200).json(posts)
     } catch (err) {
         res.status(500).json(err)
+    }
+})
+
+//模糊查询
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+router.get("/", async (req, res) => {
+    if (req.query.title) {
+        try {
+            const regex = new RegExp(escapeRegex(req.query.title), 'gi');
+            const posts = Post.find({ "name": regex })
+            res.status(200).json(posts)
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
 })
 

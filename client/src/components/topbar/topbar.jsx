@@ -1,12 +1,22 @@
 import './topbar.css'
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react"
 import { Context } from "../../context/Context"
+import axios from 'axios';
 
 
 export default function Topbar() {
     const { user, dispatch } = useContext(Context);
+    const [keyword, setKeyword] = useState("");
+    let navigate = useNavigate();
 
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        await axios.get("/posts?title=" + keyword)
+        //window.location.replace("/?title=" + keyword)
+        navigate("../?title=" + keyword, { replace: true });
+    }
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" })
     }
@@ -18,8 +28,6 @@ export default function Topbar() {
                     <li className='topListItem'>
                         <Link to="/" className='link'>Home</Link>
                     </li>
-                    {/* <li className='topListItem'>About</li>
-                    <li className='topListItem'>Contact</li> */}
                     <li className='topListItem'>
                         <Link to="/write" className='link'>Write</Link>
                     </li>
@@ -28,13 +36,10 @@ export default function Topbar() {
                     </li>
                 </ul>
             </div>
-            <div className='topCenter'>
-                {/* <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
-                <input className='topSearchInput' type="search" /> */}
-            </div>
+            <div className="topCenter"></div>
             <div className='topRight'>
-                <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
-                <input className='topSearchInput' type="search" />
+                <i className="topSearchIcon fa-solid fa-magnifying-glass" onClick={handleSearch}></i>
+                <input className='topSearchInput' type="search" onChange={e => setKeyword(e.target.value)} />
                 {
                     user ? (
                         <p>登录用户：<b>{user._doc.username}</b></p>
