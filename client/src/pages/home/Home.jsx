@@ -4,15 +4,16 @@ import Sidebar from "../../components/sidebar/Sidebar"
 import Bottombar from "../../components/bottombar/Bottombar"
 import "./home.css"
 
-export default function Home({ posts }) {
+export default function Home({ props }) {
+    const pages = props.slice(1, 3)
     return (
         <div className="homewrapper">
             <Header />
             <div className="home">
-                <Posts posts={posts} />
+                <Posts posts={props[0]} />
                 <Sidebar />
             </div>
-            <Bottombar />
+            <Bottombar props={pages} />
         </div>
     )
 }

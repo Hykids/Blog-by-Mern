@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const pagination = require('mongoose-sex-page');
 const Post = require("../models/Post");
 
 //Create
@@ -68,26 +69,29 @@ router.get("/", async (req, res) => {
     const username = req.query.user
     const tabName = req.query.tab
     const title = req.query.title
+    const page = req.query.page
     try {
         let posts;
         if (tabName) {
-            posts = await Post.find({
+            posts = await pagination(Post).find({
                 tab: {
                     $in: [tabName],
                 }
-            }).sort({ _id: -1 })
+            }).sort({ _id: -1 }).page(page || 1).size(6).exec();
         } else if (username) {
-            posts = await Post.find({ username }).sort({ _id: -1 })
+            posts = await pagination(Post).find({ username }).sort({ _id: -1 }).page(page || 1).size(6).exec();
         } else if (title) {
-            posts = await Post.find({ "title": title })
+            posts = await pagination(Post).find({ "title": title }).sort({ _id: -1 }).page(page || 1).size(6).exec();
         } else {
-            posts = await Post.find().sort({ _id: -1 }).limit(6)
+            posts = await pagination(Post).find().sort({ _id: -1 }).page(page).size(6).exec();
         }
         res.status(200).json(posts)
     } catch (err) {
         res.status(500).json(err)
     }
 })
+
+
 
 //模糊查询
 function escapeRegex(text) {
