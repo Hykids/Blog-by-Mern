@@ -1,5 +1,5 @@
 .post {
-    width: 80%;
+    width: 70%;
     margin: 0px 0px 20px;
     margin-left: 250px;
     padding: 10px;
@@ -34,8 +34,11 @@
     font-size: 11px;
     color: #be9656;
     line-height: 20px;
-    margin-right: 10px;
     cursor: pointer;
+}
+
+.postTab {
+    margin-right: 10px;
 }
 
 .postTitle {
@@ -63,6 +66,7 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
 
 .postTitle:after {
     position: absolute;

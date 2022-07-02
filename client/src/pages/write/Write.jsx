@@ -1,20 +1,68 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Context } from '../../context/Context'
 import axios from 'axios'
 import './write.css'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Write() {
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
     const [file, setFile] = useState(null)
     const { user } = useContext(Context)
+    const [open, setOpen] = useState(false);
+    const [tabs, setTabs] = useState([]);
+    const [newTab, setnewTab] = useState([]);
+    const [keyword, setKeyword] = useState("");
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            const res = await axios.get("/tabs")
+            setTabs(res.data)
+        }
+        fetchItems()
+    }, [tabs])
+
+    const handleClick = (e) => {
+        var tabarray = newTab
+        tabarray.push(e.target)
+        setnewTab(tabarray)
+    }
+
+    const handleTabSubmit = async () => {
+        const data = { tab: keyword }
+        await axios.post("/tabs", data)
+        setOpen(false);
+        // if (res.status == 200) {
+        //     return (
+        //         <Stack sx={{ width: '100%' }} spacing={2}>
+        //             <Alert severity="success">This is a success alert — check it out!</Alert>
+        //         </Stack>
+        //     );
+        // }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const tab = newTab.map(t => t['innerHTML'])
         const newPost = {
             username: user._doc.username,
             title,
             desc,
+            tab
         }
         if (file) {
             const data = new FormData();
@@ -28,7 +76,7 @@ export default function Write() {
         }
         try {
             await axios.post("/posts", newPost)
-            // window.location.replace("/")
+            window.location.replace("/")
         } catch (err) { }
     }
     return (
@@ -46,7 +94,41 @@ export default function Write() {
                     <textarea placeholder='Tell your story..' type="text" className="writeInput" onChange={e => setDesc(e.target.value)}></textarea>
                 </div>
                 <button className='writeSubmit' type="submit">Publish</button>
+                {newTab && <ul className='tabList'>{newTab.map(t => {
+                    return <li className="tabListItem">{t['innerHTML']}
+                        <i className="cancelIcon fa-solid fa-xmark"></i>
+                    </li>
+                })}</ul>}
             </form>
+            <div className='dialogBtn'>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    #添加标签
+                </Button>
+            </div>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>选择标签</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        onBlur={e => setKeyword(e.target.value)}
+                        margin="dense"
+                        id="name"
+                        label="添加标签"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <DialogContentText>
+                        <ul className='tabList'>{tabs.map((t, index) => {
+                            return <li key={index} className="tabListItem" onClick={handleClick}>{t['tab']}</li>
+                        })}</ul>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>取消</Button>
+                    <Button onClick={handleTabSubmit}>确定</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }

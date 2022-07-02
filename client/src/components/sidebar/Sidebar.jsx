@@ -1,19 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
 import axios from "axios"
 import './sidebar.css'
 
 export default function Sidebar() {
   const [tabs, setTabs] = useState([]);
-  const [newTab, setnewTab] = useState([]);
 
-  // const handleChange = async (value) => {
-  //   await setTabs(value)
-  //   localStorage.setItem("tabs", JSON.stringify(newTab))
-  // }
   useEffect(() => {
     const fetchItems = async () => {
       const res1 = await axios.get("/tabs")
@@ -37,28 +29,12 @@ export default function Sidebar() {
         <span className="sidebarTitle">
           <i className="sidebarIcon fa-solid fa-tags"></i>Tag</span>
         <ul className='sidebatList'>
-          {tabs.map(t => {
+          {tabs.map((t, index) => {
             return <Link to={'/?tab=' + t.tab} className="link">
-              <li className="sidebarListItem">{t['tab']}</li>
+              <li key={index} className="sidebarListItem">{t['tab']}</li>
             </Link>
           })}
         </ul>
-        <Stack spacing={3} sx={{ width: 250 }}>
-          <Autocomplete
-            multiple
-            id="tags-standard"
-            options={tabs}
-            getOptionLabel={(option) => option.tab}
-            onChange={(value) => { setnewTab(value) }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="standard"
-                label="选择标签"
-                placeholder="Tabs"
-              />
-            )}
-          /></Stack>
       </div>
     </div>
   )

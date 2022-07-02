@@ -12,6 +12,7 @@ export default function SinglePost() {
     const { user } = useContext(Context)
 
     const [title, setTitle] = useState("")
+    const [tabs, setTabs] = useState([])
     const [desc, setDesc] = useState("")
     const [update, setUpdate] = useState(false)
 
@@ -21,6 +22,7 @@ export default function SinglePost() {
             setPost(res.data)
             setTitle(res.data.title)
             setDesc(res.data.desc)
+            setTabs(res.data.tab)
         };
         getPost()
     }, [path]);
@@ -70,9 +72,18 @@ export default function SinglePost() {
                     <span className='singlePostDate'>{new Date(post.createdAt).toDateString()}</span>
                 </div>
                 {update ? <textarea type="text" value={desc} className="singlePostDescInput" onChange={e => setDesc(e.target.value)} /> :
-                    (<p className="singlePostDesc">
-                        {desc}
-                    </p>
+                    (<div>
+                        <p className="singlePostDesc">
+                            {desc}
+                        </p>
+                        {tabs.length !== 0 && <div className="tabList">
+                            标签分类：{tabs.map(t => {
+                                return <Link to={'/?tab=' + t} className="link">
+                                    <span className="tabListItem">{t}</span>
+                                </Link>
+                            })}
+                        </div>}
+                    </div>
                     )}
                 {update && <button className="singlePostButton" onClick={handleUpdate}>保存</button>}
             </div>

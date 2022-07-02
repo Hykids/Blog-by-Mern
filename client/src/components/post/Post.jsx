@@ -1,16 +1,14 @@
 import "./post.css"
-import { Link } from "react-router-dom"
 
 function Post({ post }) {
     const PF = "http://localhost:3001/images/";
     return (
         <div className='post'>
             <div className="postInfo">
-                <Link to={'/post/' + post._id} className='link'>
-                    <span className="postTitle">
-                        {post.title}
-                    </span>
-                </Link>
+
+                <span className="postTitle">
+                    {post.title}
+                </span>
                 <div className="postTabs">
                     {post.tab.map((c, index) => {
                         return <span key={index} className="postTab">{c}</span>

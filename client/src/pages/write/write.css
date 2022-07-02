@@ -67,3 +67,27 @@
     border: none;
     font-size: 16px;
 }
+
+.dialogBtn {
+    margin-left: 170px
+}
+
+.tabList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.cancelIcon {
+    margin-left: 5px;
+}
+
+.tabListItem {
+    vertical-align: middle;
+    color: #fdfdfd;
+    padding: 4px;
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 5px;
+}

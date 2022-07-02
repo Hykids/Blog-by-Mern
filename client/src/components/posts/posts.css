@@ -1,5 +1,4 @@
 .posts {
     flex: 9;
-    flex-wrap: wrap;
-    display: flex;
+    width: 80%;
 }

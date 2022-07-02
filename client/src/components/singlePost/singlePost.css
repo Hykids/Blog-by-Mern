@@ -84,3 +84,17 @@
     border: none;
     font-size: 16px;
 }
+
+.tabList {
+    margin-top: 50px;
+}
+
+.tabListItem {
+    display: inline-block;
+    color: #fdfdfd;
+    padding: 4px;
+    background-color: cornflowerblue;
+    cursor: pointer;
+    margin: 5px 5px;
+    justify-self: start;
+}
