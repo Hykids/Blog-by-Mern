@@ -60,7 +60,8 @@
 }
 
 .singlePostDesc::first-letter {
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    margin-bottom: 50px;
 }
 
 .singlePostDescInput {
@@ -85,7 +86,7 @@
     font-size: 16px;
 }
 
-.tabList {
+.singlePostTabList {
     margin-top: 50px;
 }
 

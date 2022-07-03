@@ -1,6 +1,10 @@
 import { useLocation, Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react'
 import { Context } from '../../context/Context'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import Toast from '../toast/index'
+import ReactMarkdown from 'react-markdown'
 import axios from "axios"
 import './singlePost.css'
 
@@ -15,6 +19,7 @@ export default function SinglePost() {
     const [tabs, setTabs] = useState([])
     const [desc, setDesc] = useState("")
     const [update, setUpdate] = useState(false)
+    const [menuList, setMenuList] = useState([])
 
     useEffect(() => {
         const getPost = async () => {
@@ -34,8 +39,9 @@ export default function SinglePost() {
                 title,
                 desc,
             })
+            Toast.success("操作成功")
             setUpdate(false)
-        } catch (err) { }
+        } catch (err) { Toast.error(err.msg ? err.msg : err) }
     }
 
     const handleDelete = async () => {
@@ -46,8 +52,23 @@ export default function SinglePost() {
             window.location.replace("/")
         } catch (err) { }
     }
+
     return (
         <div className='singlePost'>
+            {menuList.length && <ul className="article-menu">
+                <li className="menu-title">目录</li>
+                {menuList.map((v, i) => {
+                    return (
+                        <li
+                            className={`menu-item menu-item--lv${v.level} ${v.highlight ? "menu-item--act" : ""
+                                }`}
+                            key={i}
+                        >
+                            {/* <span onClick={() => smoothScroll(v.offsetH)}>{v.text}</span> */}
+                        </li>
+                    );
+                })}
+            </ul>}
             <div className="singlePostWrapper">
                 {post.photo && <img className="singlePostImg" src={PF + post.photo} alt="" />}
                 {update ? <input type="text" value={title} onChange={e => { setTitle(e.target.value) }} className="singlePostTitleInput" /> : (
@@ -74,9 +95,27 @@ export default function SinglePost() {
                 {update ? <textarea type="text" value={desc} className="singlePostDescInput" onChange={e => setDesc(e.target.value)} /> :
                     (<div>
                         <p className="singlePostDesc">
-                            {desc}
+                            <ReactMarkdown children={desc}
+                                components={{
+                                    code({ node, inline, className, children, ...props }) {
+                                        const match = /language-(\w+)/.exec(className || '')
+                                        return !inline && match ? (
+                                            <SyntaxHighlighter
+                                                children={String(children).replace(/\n$/, '')}
+                                                style={dark}
+                                                language={match[1]}
+                                                PreTag="div"
+                                                {...props}
+                                            />
+                                        ) : (
+                                            <code className={className} {...props}>
+                                                {children}
+                                            </code>
+                                        )
+                                    }
+                                }} />
                         </p>
-                        {tabs.length !== 0 && <div className="tabList">
+                        {tabs.length !== 0 && <div className="singlePostTabList">
                             标签分类：{tabs.map(t => {
                                 return <Link to={'/?tab=' + t} className="link">
                                     <span className="tabListItem">{t}</span>

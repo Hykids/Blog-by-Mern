@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { Context } from '../../context/Context'
 import axios from 'axios'
 import './write.css'
+import Toast from "../../components/toast/index"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -44,15 +45,11 @@ export default function Write() {
 
     const handleTabSubmit = async () => {
         const data = { tab: keyword }
-        await axios.post("/tabs", data)
+        const res = await axios.post("/tabs", data)
         setOpen(false);
-        // if (res.status == 200) {
-        //     return (
-        //         <Stack sx={{ width: '100%' }} spacing={2}>
-        //             <Alert severity="success">This is a success alert — check it out!</Alert>
-        //         </Stack>
-        //     );
-        // }
+        if (res.status === 200) {
+            Toast.success("添加成功")
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -72,12 +69,19 @@ export default function Write() {
             newPost.photo = filename
             try {
                 await axios.post("/upload", data)
-            } catch (err) { }
+            } catch (err) { Toast.error(err.msg ? err.msg : err) }
         }
         try {
-            await axios.post("/posts", newPost)
-            window.location.replace("/")
-        } catch (err) { }
+            const res = await axios.post("/posts", newPost)
+            if (res.status === 200) {
+                Toast.success("发布成功")
+                setTimeout(() => {
+                    window.location.replace("/")
+                }, 2000);
+            }
+        } catch (err) {
+            Toast.error(err.msg ? err.msg : err)
+        }
     }
     return (
         <div className='write'>

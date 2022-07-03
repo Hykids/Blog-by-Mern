@@ -71,7 +71,7 @@
     display: inline-block;
     color: #fdfdfd;
     padding: 4px;
-    background-color: cornflowerblue;
+    background-color: #BEE7E9;
     border-radius: 5px;
     cursor: pointer;
     margin: 5px 5px;
@@ -89,4 +89,32 @@
 .sidebarIcon {
     font-style: 16px;
     margin-right: 8px;
+}
+
+.tabItem--Angular {
+    background-color: #F4606C;
+}
+
+.tabItem--React {
+    background-color: #A0EEE1;
+}
+
+.tabItem--MongoDB {
+    background-color: #BEEDC7;
+}
+
+.tabItem--Web {
+    background-color: #8CC7B5;
+}
+
+.tabItem--绘画 {
+    background-color: #ECAD9E;
+}
+
+.tabItem--JavaScript {
+    background-color: #E6CEAC;
+}
+
+.tabItem--日常 {
+    background-color: #D1BA74;
 }

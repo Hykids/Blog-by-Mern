@@ -13,9 +13,11 @@
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "react-syntax-highlighter": "^15.5.0",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
@@ -43,5 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001/api/"
+  "proxy": "http://192.168.1.106:3001/api/"
 }
